@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARTA NATAL 🎄</title>
+    <style>
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/Minecraft-Font/1.0.0/Minecraft.woff2') format('woff2'),
+                 url('https://fonts.cdnfonts.com/s/35003/Minecraft.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            background: linear-gradient(180deg, #0a1128 0%, #1a0a0a 50%, #0d3321 100%);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            image-rendering: pixelated;
+            -ms-interpolation-mode: nearest-neighbor;
+        }
+
+        /* Neve caindo */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Banner - SEM CAIXA */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .titulo-hero {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 4.5rem;
+            color: #ff1515;
+            text-shadow: 
+                5px 5px 0 #430000,
+                0 0 30px #a90000;
+            margin-bottom: 0px;
+            letter-spacing: 3px;
+        }
+
+        .subtitulo-hero {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 1.4rem;
+            line-height: 2.2;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.8);
+            max-width: 900px;
+        }
+
+        .decoracao-natal {
+            font-size: 2.5rem;
+            margin: 30px 0;
+        }
+
+        /* Scroll indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        .scroll-down span {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-bottom: 4px solid #FFD700;
+            border-right: 4px solid #FFD700;
+            transform: rotate(45deg);
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { opacity: 0; transform: rotate(45deg) translateY(-20px); }
+            50% { opacity: 1; transform: rotate(45deg) translateY(0); }
+        }
+
+        /* Carrossel melhorado - ESTILO HOVER */
+        .carrossel-container {
+            margin: 80px 0;
+            position: relative;
+            padding: 0 60px;
+        }
+
+        .carrossel-titulo {
+            text-align: center;
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 2.5rem;
+            color: #FFD700;
+            text-shadow: 4px 4px 0 #8B4513;
+            margin-bottom: 30px;
+        }
+
+        .carrossel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carrossel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            gap: 30px;
+            will-change: transform;
+            align-items: center;
+            padding-left: 36.5%;
+        }
+
+        .slide {
+            min-width: 28%;
+            height: 380px;
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            cursor: pointer;
+            flex-shrink: 0;
+            transform: scale(0.85);
+            opacity: 0.6;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid #228B22;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            display: block;
+            filter: grayscale(100%) brightness(0.7);
+        }
+
+        .slide.active {
+            transform: scale(1.15);
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide.active img {
+            border-color: #ff0000;
+            box-shadow: 
+                0 0 20px rgba(255, 0, 0, 0.5),
+                0 0 15px rgba(255, 215, 0, 0.3),
+                0 15px 40px rgba(0, 0, 0, 0.652);
+            filter: grayscale(0%) brightness(1.1);
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(34, 139, 34, 0.9);
+            border: 4px solid #FFD700;
+            color: #FFD700;
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-weight: bold;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 215, 0, 0.9);
+            color: #228B22;
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        #voltar {
+            left: -60px;
+        }
+
+        #avancar {
+            right: -60px;
+        }
+
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border: 3px solid #FFD700;
+            background: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .indicator.active {
+            background: #FFD700;
+            transform: scale(1.3);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* FAIXA DE SÍMBOLOS NATALINOS */
+        .simbolos-natal {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 4px solid #228B22;
+            border-bottom: 4px solid #DC143C;
+            padding: 25px 0;
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .simbolos-scroll {
+            display: flex;
+            animation: scrollInfinito 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        .simbolos-scroll span {
+            font-size: 2.5rem;
+            margin: 0 30px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes scrollInfinito {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Texto */
+        .texto {
+            background: rgba(0, 0, 0, 0.8);
+            border: 6px solid #228B22;
+            padding: 40px;
+            margin: 60px 0;
+            position: relative;
+            box-shadow: 0 0 30px rgba(34, 139, 34, 0.5);
+            image-rendering: pixelated;
+        }
+
+        .texto-titulo {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 2.5rem;
+            color: #FFD700;
+            text-shadow: 4px 4px 0 #8B4513;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #typewriter-text {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 1.2rem;
+            line-height: 2.5;
+            color: #fff;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .eu-te-amo {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            font-size: 3rem;
+            color: #FFD700;
+            text-shadow: 
+                4px 4px 0 #DC143C,
+                0 0 20px #FFD700;
+            text-align: center;
+            margin-top: 40px;
+            display: block;
+        }
+
+        .escondido {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .visivel {
+            visibility: visible;
+            opacity: 1;
+            animation: aparecer 2s ease forwards;
+        }
+
+        @keyframes aparecer {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(20px);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Decorações natalinas */
+        .ornamento {
+            position: fixed;
+            font-size: 3rem;
+            z-index: 0;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .slide {
+                min-width: calc(50% - 10px);
+            }
+
+            #voltar {
+                left: 10px;
+            }
+
+            #avancar {
+                right: 10px;
+            }
+
+            .carrossel-container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .titulo-hero {
+                font-size: 2.5rem;
+            }
+
+            .subtitulo-hero {
+                font-size: 1.1rem;
+                line-height: 2;
+            }
+
+            .slide {
+                min-width: 80%;
+                height: 400px;
+                transform: scale(0.9);
+            }
+
+            .slide.active {
+                transform: scale(1);
+            }
+
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8rem;
+            }
+
+            #voltar, #avancar {
+                position: absolute;
+                z-index: 20;
+            }
+
+            #voltar {
+                left: 10px;
+            }
+
+            #avancar {
+                right: 10px;
+            }
+
+            .texto-titulo {
+                font-size: 1.8rem;
+            }
+
+            #typewriter-text {
+                font-size: 1rem;
+                line-height: 2.2;
+            }
+
+            .eu-te-amo {
+                font-size: 2rem;
+            }
+
+            .carrossel-titulo {
+                font-size: 1.8rem;
+            }
+
+            .simbolos-scroll span {
+                font-size: 2rem;
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neve caindo -->
+    <div class="snowflakes"></div>
+
+    <!-- Ornamentos decorativos -->
+    <div class="ornamento" style="top: 10%; left: 5%;">✰</div>
+    <div class="ornamento" style="top: 20%; right: 8%;">♡</div>
+    <div class="ornamento" style="top: 60%; left: 3%;">✰</div>
+    <div class="ornamento" style="top: 70%; right: 5%;">♡</div>
+
+    <div class="container">
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <h1 class="titulo-hero">FELIZ NATAL, ALANINHA!</h1>
+            <div class="decoracao-natal">━━━━━━━━━━━━༺ ✦ ༻━━━━━━━━━━━━</div>
+            <p class="subtitulo-hero">
+                Neste Natal especial, Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla.
+            </p>
+            <p class="subtitulo-hero">
+                Bla Bla Bla Bla Bla
+            </p>
+            <div class="decoracao-natal">⭐ 🎁 ✨ 🎁 ⭐</div>
+            <div class="scroll-down">
+                <span></span>
+            </div>
+        </section>
+
+        <!-- Carrossel -->
+        <div class="carrossel-container">
+            <h2 class="carrossel-titulo">🎄 NOSSAS MEMORIAS 🎄</h2>
+            <div class="carrossel-wrapper">
+                <div class="carrossel">
+                    <div class="slides">
+                        <div class="slide"><img src="img/1.webp" alt="Foto 1"></div>
+                        <div class="slide"><img src="img/2.webp" alt="Foto 2"></div>
+                        <div class="slide"><img src="img/3.webp" alt="Foto 3"></div>
+                        <div class="slide"><img src="img/4.webp" alt="Foto 4"></div>
+                        <div class="slide"><img src="img/5.webp" alt="Foto 5"></div>
+                        <div class="slide"><img src="img/6.webp" alt="Foto 6"></div>
+                        <div class="slide"><img src="img/7.webp" alt="Foto 7"></div>
+                        <div class="slide"><img src="img/8.webp" alt="Foto 8"></div>
+                    </div>
+                </div>
+                <button id="voltar" class="nav-btn" aria-label="Anterior">◄</button>
+                <button id="avancar" class="nav-btn" aria-label="Próximo">►</button>
+            </div>
+            <div class="indicators"></div>
+        </div>
+
+        <!-- FAIXA DE SÍMBOLOS NATALINOS -->
+        <div class="simbolos-natal">
+            <div class="simbolos-scroll">
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+                <span>✮</span>
+                <span>❆</span>
+            </div>
+        </div>
+
+        <!-- Mensagem -->
+        <div class="texto">
+            <h2 class="texto-titulo">🎄 CARTA DE NATAL 🎄</h2>
+            <p id="typewriter-text">
+                Meu amor, nosso primeiro Natal juntos chegou! 🎄<br><br>
+
+                Sabe, quando penso em tudo que vivemos desde aquela noite em que nos conhecemos, parece ate magica de Natal. Deus me abencoou com o maior presente que eu poderia ter: VOCE. Do outro lado do Brasil, la estava voce, esperando por mim, assim como eu esperava por voce.<br><br>
+
+                E olha so como fomos construindo nossa historia... Cada dia, cada conversa, cada risada (principalmente com aquela skin de lumbriga ksks). Construimos um caminho cheio de fe, cuidado, paciencia e MUITO amor. Nosso relacionamento e valioso porque sabemos tudo que passamos para chegar ate aqui.<br><br>
+
+                Todas as noites eu agradeco a Deus por ter voce ao meu lado, me amando com esse seu coracaozinho lindo. Meu amor, eu sou o homem MAIS SORTUDO do universo! Voce me fez e continua me fazendo um homem melhor a cada dia.<br><br>
+
+                Neste Natal, quero te agradecer por TUDO que voce faz por mim. 🎁 Saiba que eu sou o homem MAIS FELIZ do mundo ao seu lado. Acordo pensando em voce, no seu sorriso, nas nossas memorias e em tudo que ainda vamos viver juntos. Quero construir as melhores lembrancas ao seu lado!<br><br>
+
+                Meu futuro tem voce em cada sonho: ser seu marido, pai dos seus filhos... Eu luto todos os dias para que isso aconteca. E se ja me sinto tao realizado agora, imagina depois! ✨<br><br>
+
+                Sempre havera um pedaco de voce em mim. Para sempre. E eu sou eternamente grato por isso. 💚🎄<br><br>
+            </p>
+            <span id="eu-te-amo" class="eu-te-amo escondido">
+                EU TE AMO MUITO,<br>MINHA GAROTINHA! 🎄🤍
+            </span>
+        </div>
+    </div>
+
+    <script>
+        // Neve caindo
+        const snowflakesContainer = document.querySelector('.snowflakes');
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowflakesContainer.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 5000);
+        }
+        setInterval(createSnowflake, 200);
+
+        // Carrossel melhorado
+        let currentIndex = 1; // Começa no segundo slide
+        const slides = document.querySelector('.slides');
+        const slideElements = document.querySelectorAll('.slide');
+        const totalSlides = slideElements.length;
+        const indicators = document.querySelector('.indicators');
+
+        // Determinar quantos slides mostrar por vez
+        let slidesPerView = window.innerWidth > 1200 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+        
+        window.addEventListener('resize', () => {
+            slidesPerView = window.innerWidth > 1200 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+        });
+
+        // Criar indicadores
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (i === 1) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(i));
+            indicators.appendChild(indicator);
+        }
+
+        const indicatorElements = document.querySelectorAll('.indicator');
+
+        function updateIndicators() {
+            indicatorElements.forEach((ind, idx) => {
+                ind.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        function updateSlideStates() {
+            slideElements.forEach((slide, idx) => {
+                slide.classList.remove('active');
+                if (idx === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function showSlide(index) {
+            const slideWidth = slideElements[0].offsetWidth + 30;
+            const offset = index * slideWidth;
+            slides.style.transform = `translate3d(-${offset}px, 0, 0)`;
+            updateIndicators();
+            updateSlideStates();
+        }
+
+        // Inicializar o carrossel
+        showSlide(currentIndex);
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            showSlide(currentIndex);
+        }
+
+        document.getElementById('avancar').addEventListener('click', () => {
+            nextSlide();
+        });
+
+        document.getElementById('voltar').addEventListener('click', () => {
+            prevSlide();
+        });
+
+        // Scroll suave
+        document.querySelector('.scroll-down').addEventListener('click', () => {
+            document.querySelector('.carrossel-container').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+
+        // Efeito typewriter
+        function typeWriter(elemento, velocidade = 30, aoFinal = null) {
+            const textoOriginal = elemento.innerHTML;
+            elemento.textContent = '';
+            let i = 0;
+            let dentroDeTag = false;
+            let tagBuffer = '';
+
+            function escrever() {
+                if (i < textoOriginal.length) {
+                    const char = textoOriginal[i];
+                    if (char === '<') {
+                        dentroDeTag = true;
+                        tagBuffer = char;
+                    } else if (char === '>' && dentroDeTag) {
+                        tagBuffer += char;
+                        elemento.innerHTML += tagBuffer;
+                        dentroDeTag = false;
+                        tagBuffer = '';
+                    } else if (dentroDeTag) {
+                        tagBuffer += char;
+                    } else {
+                        elemento.innerHTML += char;
+                    }
+                    i++;
+                    setTimeout(escrever, velocidade);
+                } else {
+                    if (aoFinal) aoFinal();
+                }
+            }
+            escrever();
+        }
+
+        // Inicializar typewriter
+        window.addEventListener('load', () => {
+            const texto = document.getElementById('typewriter-text');
+            const euTeAmo = document.getElementById('eu-te-amo');
+            
+            typeWriter(texto, 30, () => {
+                euTeAmo.classList.remove('escondido');
+                euTeAmo.classList.add('visivel');
+            });
+        });
+
+        // Suporte para teclado no carrossel
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+
+        // Suporte para gestos de swipe em mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slides.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slides.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>

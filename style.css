@@ -1,0 +1,430 @@
+
+
+/* Fundo da página */
+body {
+    background-color: #000;
+    color: #00000000;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* INTRODUÇÃO ROMÂNTICA - MOBILE FIRST */
+.intro-romantica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto 20px;
+    padding: 15px;
+    background-color: rgba(26, 26, 26, 0.8);
+    border-radius: 12px;
+    border: 1px solid hsl(220, 100%, 54%);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* HERO BANNER - TELA INTEIRA */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Cobrir a tela inteira */
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(26,26,26,0.8) 100%);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.titulo-hero {
+  font-family: 'Norican', cursive;
+  font-size: 4rem;
+  color: hsl(0, 100%, 70%);
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px hsl(0, 100%, 50%);
+  
+}
+
+.subtitulo-hero {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Seta de scroll (opcional) */
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.scroll-down span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid hsl(0, 0%, 100%);
+  border-right: 2px solid hsl(0, 0%, 100%);
+  transform: rotate(45deg);
+  animation: scrollAnimation 2s infinite;
+}
+
+@keyframes scrollAnimation {
+  0% { opacity: 0; transform: rotate(45deg) translate(-10px, -10px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(10px, 10px); }
+}
+
+/* Efeito de corações no fundo do banner */
+.hero-banner .coraçoes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .titulo-hero {
+    font-size: 3rem;
+  }
+  
+  .subtitulo-hero {
+    font-size: 1rem;
+  }
+  
+  .hero-banner {
+    min-height: 500px;
+  }
+}
+
+.titulo-romantico {
+    font-family: 'Norican', cursive;
+    font-size: 3rem;
+    color: hsl(0, 0%, 100%);
+    margin-right: auto;
+    text-shadow: 0 0 5px hsl(0, 0%, 100%);
+}
+
+.subtitulo-romantico {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #fff;
+    margin: 0;
+    padding: 0 10px;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 100%;
+}
+
+/* GARANTINDO QUE NADA SOBRESCREVA */
+body .intro-romantica,
+body .titulo-romantico,
+body .subtitulo-romantico {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+}
+
+/* Adicione esta animação se quiser um efeito pulsante no título */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Carrossel */
+.carrossel {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 3px solid hsl(0, 0%, 100%);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  width: 800%; /* 8 imagens → 8 * 100% */
+  transition: transform 0.5s ease-in-out;
+}
+/* Neve caindo */
+.snowflakes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  font-size: 1em;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+.slides img {
+  width: 100vw; /* Cada imagem ocupa toda a largura da viewport */
+  height: auto;
+  max-height: 70vh; /* Diminui a altura, mas respeita a tela */
+  flex-shrink: 0; /* Evita que as imagens encolham */
+  object-fit: cover;
+}
+
+/* Botões de navegação */
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 40px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.3s;
+}
+
+.seta:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.seta.esquerda {
+  left: 10px;
+}
+
+.seta.direita {
+  right: 10px;
+}
+
+/* Animação do carrossel */
+@keyframes slide {
+    0% { transform: translateX(0); }
+    12.5% { transform: translateX(-100%); }
+    25% { transform: translateX(-200%); }
+    37.5% { transform: translateX(-300%); }
+    50% { transform: translateX(-400%); }
+    62.5% { transform: translateX(-500%); }
+    75% { transform: translateX(-600%); }
+    87.5% { transform: translateX(-700%); }
+    100% { transform: translateX(0); }
+}
+
+#typewriter-text{
+    font-family: "Open Sans", sans-serif;
+    
+}
+
+.eu-te-amo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 50px;
+    color: hsl(0, 0%, 100%);
+    text-shadow: 0 0 10px hsl(0, 0%, 100%);
+    display: block;
+    text-align: center; /* Centraliza horizontalmente */
+    width: 100%;
+    margin: 0 auto; /* Remove o margin-left fixo */
+}
+
+.escondido {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.eu-te-amo.visivel {
+  visibility: visible;
+  opacity: 1;
+  animation: aparecerDoAmor 1s ease forwards;
+}
+
+@keyframes aparecerDoAmor {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.norican {
+    font-family: 'Norican', cursive !important;
+    color: hsl(0, 0%, 100%) !important;
+}
+
+#voltar,
+#avancar {
+  background: none;
+  border: none;
+  color: white; /* ou a mesma cor do .scroll-down */
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+#voltar:hover,
+#avancar:hover {
+  opacity: 1;
+}
+
+#voltar {
+  left: 10px;
+}
+
+#avancar {
+  right: 10px;
+}
+
+
+
+/* Cronômetro */
+.cronometro {
+    background-color: #1a1a1a;
+    border: 2px solid hsl(0, 0%, 100%);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cronometro h2 {
+    color: hsl(0, 0%, 100%);
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+#timer {
+    color: hsl(0, 0%, 100%);
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Texto */
+.texto {
+    position: relative;
+    background-color: rgba(26, 26, 26, 0.9);
+    border: 2px solid hsl(0, 0%, 100%);
+    border-radius: 20px;
+    padding: 20px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.texto.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.texto p {
+    position: relative;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Coração no fundo */
+.heart-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.08;
+    z-index: 0;
+}
+
+.heart {
+    width: 300px;
+    height: 300px;
+    fill: hsl(0, 0%, 100%);
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {transform: translate(-50%, -50%) scale(1);}
+    50% {transform: translate(-50%, -50%) scale(1.2);}
+    100% {transform: translate(-50%, -50%) scale(1);}
+}
+
+/* Animação de corações */
+.coraçoes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.coraçoes span {
+    position: absolute;
+    color: hsl(0, 0%, 100%);
+    font-size: 20px;
+    animation: subir 5s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-10vh) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Responsividade */
+@media screen and (max-width: 430px) {
+    .cronometro h2 {
+        font-size: 20px;
+    }
+
+    #timer {
+        font-size: 24px;
+    }
+
+    .texto p {
+        font-size: 16px;
+    }
+}
