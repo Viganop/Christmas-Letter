@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CARTA NATAL 🎄</title>
     <style>
-        @font-face {
-            font-family: 'Minecraft';
-            src: url('https://cdnjs.cloudflare.com/ajax/libs/Minecraft-Font/1.0.0/Minecraft.woff2') format('woff2');
+        /* Fonte do Minecraft - ATUALIZADA */
+        @import url('https://fonts.cdnfonts.com/css/minecraft-4');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Minecraft', 'Courier New', monospace;
+            background: linear-gradient(180deg, #0a1128 0%, #1a0a0a 50%, #0d3321 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            image-rendering: pixelated;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -34,7 +42,7 @@
             width: 120%; 
             left: -10%;
             height: 100px;
-            animation: balancar var(--swing-duration, 5s) ease-in-out infinite;
+            animation: balancar var(--swing-duration, 10s) ease-in-out infinite;
             transform-origin: 50% 0%;
             will-change: transform;
         }
@@ -73,7 +81,7 @@
             transform: translateX(-50%);
             width: 4px;
             height: 5px;
-            background: linear-gradient(to bottom, #1a1a1a, #333);
+            background: linear-gradient(to bottom, #1a1a1a, #ff0000);
             border-radius: 2px 2px 0 0;
         }
         .luz::after {
@@ -114,7 +122,7 @@
         .slide img { width: 100%; height: 100%; object-fit: cover; border: 2px solid rgba(80, 80, 80, 0.3); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); display: block; filter: grayscale(100%) brightness(0.5); border-radius: 6px; }
         .slide.active { transform: scale(1.08); opacity: 1; z-index: 10; }
         .slide.active img { 
-            border-color: rgba(180, 50, 50, 0.6); 
+            border-color: rgba(180, 167, 50, 0.941); 
             box-shadow: 
                 0 0 15px rgba(255, 80, 80, 0.2),
                 0 0 30px rgba(255, 100, 100, 0.15),
@@ -138,7 +146,7 @@
         @keyframes scrollInfinito { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .texto { background: rgba(0, 0, 0, 0.8); border: 6px solid #228B22; padding: 40px; margin: 60px 0; box-shadow: 0 0 30px rgba(34, 139, 34, 0.5); }
         .texto-titulo { font-size: 2.5rem; color: #FFD700; text-shadow: 4px 4px 0 #8B4513; text-align: center; margin-bottom: 30px; }
-        #typewriter-text { font-size: 1.2rem; line-height: 2.5; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8); }
+        #typewriter-text { font-size: 1.2rem; line-height: 2.5; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8); text-align: center; }
         .eu-te-amo { font-size: 3rem; color: #FFD700; text-shadow: 4px 4px 0 #DC143C, 0 0 20px #FFD700; text-align: center; margin-top: 40px; display: block; }
         .escondido { visibility: hidden; opacity: 0; }
         .visivel { visibility: visible; opacity: 1; animation: aparecer 2s ease forwards; }
@@ -191,7 +199,7 @@
             #voltar { left: 5px; }
             #avancar { right: 5px; }
             .texto-titulo { font-size: 1.8rem; }
-            #typewriter-text { font-size: 1rem; line-height: 2.2; }
+            #typewriter-text { font-size: 1rem; line-height: 2.2;}
             .eu-te-amo { font-size: 2rem; }
             .carrossel-titulo { font-size: 1.8rem; }
             .simbolos-scroll span { font-size: 2rem; margin: 0 20px; }
@@ -244,19 +252,22 @@
             </div>
         </div>
 
+        <h2 class="texto-titulo">🎄 CARTA DE NATAL 🎄</h2>
+
         <div class="texto">
-            <h2 class="texto-titulo">🎄 CARTA DE NATAL 🎄</h2>
             <p id="typewriter-text">
-                Meu amor, nosso primeiro Natal juntos chegou! 🎄<br><br>
-                Sabe, quando penso em tudo que vivemos desde aquela noite em que nos conhecemos, parece ate magica de Natal. Deus me abencoou com o maior presente que eu poderia ter: VOCE. Do outro lado do Brasil, la estava voce, esperando por mim, assim como eu esperava por voce.<br><br>
-                E olha so como fomos construindo nossa historia... Cada dia, cada conversa, cada risada (principalmente com aquela skin de lumbriga ksks). Construimos um caminho cheio de fe, cuidado, paciencia e MUITO amor. Nosso relacionamento e valioso porque sabemos tudo que passamos para chegar ate aqui.<br><br>
-                Todas as noites eu agradeco a Deus por ter voce ao meu lado, me amando com esse seu coracaozinho lindo. Meu amor, eu sou o homem MAIS SORTUDO do universo! Voce me fez e continua me fazendo um homem melhor a cada dia.<br><br>
-                Neste Natal, quero te agradecer por TUDO que voce faz por mim. 🎁 Saiba que eu sou o homem MAIS FELIZ do mundo ao seu lado. Acordo pensando em voce, no seu sorriso, nas nossas memorias e em tudo que ainda vamos viver juntos. Quero construir as melhores lembrancas ao seu lado!<br><br>
-                Meu futuro tem voce em cada sonho: ser seu marido, pai dos seus filhos... Eu luto todos os dias para que isso aconteca. E se ja me sinto tao realizado agora, imagina depois! ✨<br><br>
-                Sempre havera um pedaco de voce em mim. Para sempre. E eu sou eternamente grato por isso. 💚🎄<br><br>
+                Meu amor, nosso primeiro Natal juntos chegou! 🎄
             </p>
-            <span id="eu-te-amo" class="eu-te-amo escondido">EU TE AMO MUITO,<br>MINHA GAROTINHA! 🎄🤍</span>
         </div>
+        
+        <span id="eu-te-amo" class="eu-te-amo escondido">EU TE AMO MUITO,<br>MINHA GAROTINHA! 🎄🤍</span>
+
+
+
+
+
+
+
     </div>
 
     <script>
